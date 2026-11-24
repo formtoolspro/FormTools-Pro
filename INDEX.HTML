@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormTools Pro - Free Online Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="fnav" id="top">
+  <div class="fnav-in">
+    <a href="#top" class="fnav-logo">FORMTOOLS <span>PRO</span></a>
+
+    <button class="fnav-burger" id="fnavBurger" type="button" aria-label="Menu">☰</button>
+
+    <div class="fnav-menu" id="fnavMenu">
+      <a href="#top">Home</a>
+      <a href="#image-tools">Image Tools</a>
+      <a href="#pdf-tools">PDF Tools</a>
+      <a href="#pan-auto">Government Tools</a>
+      <a href="#image-tools" class="fnav-btn">Explore Tools</a>
+    </div>
+  </div>
+
+  <style>
+    html{scroll-behavior:smooth}
+    .fnav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.92);
+      backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .fnav-in{max-width:1150px;margin:auto;padding:12px 20px;display:flex;align-items:center;
+      justify-content:space-between;gap:16px}
+    .fnav-logo{font-size:24px;font-weight:800;color:#0d4fc4;text-decoration:none;letter-spacing:.5px;white-space:nowrap}
+    .fnav-logo span{color:#4f6df5}
+    .fnav-menu{display:flex;align-items:center;gap:6px}
+    .fnav-menu a{text-decoration:none;color:#333;font-size:16px;padding:8px 14px;border-radius:8px;
+      white-space:nowrap;transition:background .2s,color .2s}
+    .fnav-menu a:hover{background:#eef4ff;color:#0d6efd}
+    .fnav-menu a.fnav-btn{background:#0d6efd;color:#fff;font-weight:600;margin-left:8px;padding:10px 20px}
+    .fnav-menu a.fnav-btn:hover{background:#0b5ed7;color:#fff}
+    .fnav-burger{display:none;background:none;border:0;font-size:28px;color:#0d4fc4;cursor:pointer}
+
+    @media (max-width:800px){
+      .fnav-burger{display:block}
+      .fnav-menu{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;
+        flex-direction:column;align-items:stretch;padding:10px 16px 16px;gap:4px;
+        box-shadow:0 8px 14px rgba(0,0,0,.1)}
+      .fnav-menu.open{display:flex}
+      .fnav-menu a{padding:12px 14px}
+      .fnav-menu a.fnav-btn{margin:8px 0 0;text-align:center}
+    }
+  </style>
+
+  <script>
+    (function () {
+      var b = document.getElementById('fnavBurger'), m = document.getElementById('fnavMenu');
+      b.addEventListener('click', function () { m.classList.toggle('open'); });
+      m.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { m.classList.remove('open'); });
+      });
+    })();
+  </script>
+</div>
+
+
+<section class="hero">
+    <div class="badge">✦ 100% Free Online Tools</div>
+
+    <h1>All Your Document Tools<br>
+        <span>In One Place.</span>
+    </h1>
+
+    <p>Compress images, resize photos, manage PDFs and prepare documents for government forms easily.</p>
+
+    <div class="search-box">
+        <input type="text" id="searchInput"
+        placeholder="Search tools...">
+        <button onclick="searchTools()">Search</button>
+    </div>
+
+    <div class="hero-info">
+        <span>✓ Free Tools</span>
+        <span>✓ Easy to Use</span>
+        <span>✓ Secure Processing</span>
+    </div>
+</section>
+<section class="compressor-section" id="compressor">
+
+    <div class="compressor-heading">
+        <span class="badge">PREMIUM IMAGE TOOL</span>
+        <h2>Photo <span>Compressor</span></h2>
+        <p>Compress your photos to your desired KB size.</p>
+    </div>
+
+    <div class="compressor-box">
+
+        <label for="photoInput" class="upload-area">
+            <div class="upload-icon">📸</div>
+            <h3>Upload Your Photo</h3>
+            <p>Click here to select JPG, PNG or WebP</p>
+            <span>Maximum upload size: 15MB</span>
+        </label>
+
+        <input type="file" id="photoInput"
+        accept="image/jpeg,image/png,image/webp">
+
+        <div id="previewBox" class="preview-box">
+            <img id="previewImage" alt="Photo preview">
+        </div>
+
+        <div class="size-control">
+            <label>Select Target Size</label>
+
+            <select id="targetSize">
+                <option value="20">20 KB</option>
+                <option value="50">50 KB</option>
+                <option value="100" selected>100 KB</option>
+                <option value="200">200 KB</option>
+                <option value="500">500 KB</option>
+            
+
+<section class="tools-section" id="image-tools">
+    <div class="section-heading">
+        <h2>Image Tools</h2>
+        <p>Resize and compress your images easily.</p>
+    </div>
+
+    <div class="tools-grid">
+        <div class="tool-card">
+      <div class="icon">🪪</div>
+      <h3>PAN Photo Resizer</h3>
+      <p>Resize photo & signature for UTI / NSDL.</p>
+      <button onclick="fmShow('pan-auto')">Use Tool →</button>
+    </div>
+
+    <div class="tool-card">
+      <div class="icon">🎂</div>
+      <h3>Age Calculator</h3>
+      <p>Exact age and form eligibility check.</p>
+      <button onclick="fmShow('age-calc')">Use Tool →</button>
+    </div>
+
+    <style>
+      /* Ye dono tools shuru mein chhupe rahenge, card dabane par khulenge */
+      #pan-auto, #age-calc { display: none; }
+    </style>
+    <script>
+      function fmShow(id) {
+        ['pan-auto', 'age-calc'].forEach(function (x) {
+          var e = document.getElementById(x);
+          if (e) e.style.display = (x === id) ? 'block' : 'none';
+        });
+        var t = document.getElementById(id);
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      // Navbar ka "Government Tools" link bhi PAN tool khole
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('a[href="#pan-auto"]').forEach(function (a) {
+          a.addEventListener('click', function (ev) { ev.preventDefault(); fmShow('pan-auto'); });
+        });
+      });
+    </script>
+
+
+        <div class="tool-card">
+            <div class="icon">📸</div>
+            <h3>Photo Compressor</h3>
+            <p>Reduce photo size to 20KB, 50KB or 100KB.</p>
+            <button onclick="openTool('compressor')">Use Tool →</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon">🖼️</div>
+            <h3>Photo Resizer</h3>
+            <p>Resize photos according to required dimensions.</p>
+            <button onclick="openTool('resizer')">Use Tool →</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon">✂️</div>
+            <h3>Image Cropper</h3>
+            <p>Crop your image in different sizes.</p>
+            <button onclick="openTool('cropper')">Use Tool →</button>
+        </div>
+
+    </div>
+</section>
+
+<section class="tools-section" id="pdf-tools">
+    <div class="section-heading">
+        <h2>PDF Tools</h2>
+        <p>Manage your PDF documents in seconds.</p>
+    </div>
+
+    <div class="tools-grid">
+
+        <div class="tool-card">
+            <div class="icon">📄</div>
+            <h3>PDF Compressor</h3>
+            <p>Reduce the size of your PDF documents.</p>
+            <button onclick="openTool('pdfcompress')">Use Tool →</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon">🔗</div>
+            <h3>Merge PDF</h3>
+            <p>Combine multiple PDF files into one.</p>
+            <button onclick="openTool('merge')">Use Tool →</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon">📑</div>
+            <h3>JPG to PDF</h3>
+            <p>Convert your images into PDF files.</p>
+            <button onclick="openTool('jpgpdf')">Use Tool →</button>
+        </div>
+
+    </div>
+</section>
+
+<section class="tools-section" id="gov-tools">
+    <div class="section-heading">
+        <h2>Government Form Tools</h2>
+        <p>Prepare photos and signatures for applications.</p>
+    </div>
+
+    <div class="tools-grid">
+
+        <div class="tool-card">
+            <div class="icon">🪪</div>
+            <h3>PAN Card Photo</h3>
+            <p>Prepare your photo according to application requirements.</p>
+            <button onclick="openTool('pan')">Use Tool →</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon">✍️</div>
+            <h3>Signature Resizer</h3>
+            <p>Resize your signature for online forms.</p>
+            <button onclick="openTool('signature')">Use Tool →</button>
+        </div>
+
+        <div class="tool-card">
+            <div class="icon">🎓</div>
+            <h3>Exam Photo Maker</h3>
+            <p>Prepare photos for competitive exam applications.</p>
+            <button onclick="openTool('exam')">Use Tool →</button>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <h2>FORMTOOLS PRO</h2>
+    <p>Free Online Tools For Everyone.</p>
+    <p>© 2026 FormTools Pro. All Rights Reserved.</p>
+</footer>
+<!-- PHOTO COMPRESSOR TOOL -->
+
+</select>
+        </div>
+
+        <div class="size-control">
+            <label>Custom Size (KB)</label>
+            <input type="number" id="customSize"
+            placeholder="Enter size in KB" min="1" max="10000">
+        </div>
+
+        <button class="compress-btn" id="compressBtn">
+            Compress Photo →
+        </button>
+
+        <div id="resultBox" class="result-box">
+            <h3>Compression Result</h3>
+            <p id="resultText"></p>
+            <button id="downloadBtn">Download Photo ↓</button>
+        </div>
+
+        <p id="statusMessage"></p>
+
+    </div>
+</section>
+<section class="more-tools" id="more-tools">
+  <h2>More Tools</h2>
+  <div class="mt-grid">
+
+    <a class="mt-card" href="pan-tool.html">
+      <div class="mt-ico">🪪</div>
+      <b>PAN Photo Resizer</b>
+      <span>UTI / NSDL photo & signature</span>
+    </a>
+
+    <a class="mt-card" href="age-tool.html">
+      <div class="mt-ico">🎂</div>
+      <b>Age Calculator</b>
+      <span>Exact age & eligibility check</span>
+    </a>
+
+  </div>
+
+  <style>
+    .more-tools{padding:40px 16px;text-align:center}
+    .more-tools h2{margin:0 0 22px;color:#1b2a52}
+    .mt-grid{max-width:900px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .mt-card{display:block;background:#fff;border:2px solid #dee2e6;border-radius:14px;padding:24px 16px;
+      text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.05);transition:.2s}
+    .mt-card:hover{border-color:#0d6efd;transform:translateY(-4px)}
+    .mt-ico{font-size:44px}
+    .mt-card b{display:block;margin:10px 0 4px;font-size:18px;color:#1b2a52}
+    .mt-card span{font-size:14px;color:#555}
+  </style>
+</section>
+
+<section class="age-section" id="age-calc">
+  <div class="age-box">
+    <h2>Age Calculator</h2>
+    <p>Janam tithi se exact umar aur form eligibility check karein.</p>
+
+    <label for="ageDob">Date of Birth</label>
+    <input type="date" id="ageDob">
+
+    <label for="ageOn">Age as on Date <small>(form ki cut-off date)</small></label>
+    <input type="date" id="ageOn">
+
+    <div class="age-elig">
+      <div>
+        <label for="ageMin">Min age (optional)</label>
+        <input type="number" id="ageMin" min="0" placeholder="18">
+      </div>
+      <div>
+        <label for="ageMax">Max age (optional)</label>
+        <input type="number" id="ageMax" min="0" placeholder="27">
+      </div>
+    </div>
+
+    <button id="ageBtn" type="button">Calculate Age</button>
+    <div id="ageResult"></div>
+  </div>
+
+  <style>
+    .age-section{padding:40px 16px}
+    .age-box{max-width:520px;margin:auto;background:#fff;border:1px solid #dee2e6;border-radius:14px;
+      padding:24px;box-shadow:0 4px 14px rgba(0,0,0,.06);color:#222}
+    .age-box h2{text-align:center;color:#0d6efd;margin:0 0 6px}
+    .age-box p{text-align:center;margin:0 0 18px}
+    .age-box label{display:block;margin:14px 0 6px;font-weight:600}
+    .age-box small{font-weight:400;color:#666}
+    .age-box input{width:100%;box-sizing:border-box;padding:11px;border:1px solid #ced4da;border-radius:8px;font-size:16px}
+    .age-elig{display:flex;gap:12px}
+    .age-elig>div{flex:1}
+    #ageBtn{width:100%;margin-top:20px;background:#0d6efd;color:#fff;border:0;border-radius:8px;
+      padding:13px;font-size:17px;cursor:pointer}
+    #ageResult{margin-top:20px}
+    .age-main{background:#eef4ff;border:2px solid #0d6efd;border-radius:10px;padding:16px;text-align:center;
+      font-size:22px;font-weight:700;color:#0b4fb3}
+    .age-list{margin:14px 0 0;padding:0;list-style:none}
+    .age-list li{padding:9px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;gap:10px}
+    .age-ok{margin-top:14px;padding:12px;border-radius:8px;text-align:center;font-weight:700;background:#d1e7dd;color:#0f5132}
+    .age-no{margin-top:14px;padding:12px;border-radius:8px;text-align:center;font-weight:700;background:#f8d7da;color:#842029}
+    .age-err{color:#842029;text-align:center;font-weight:600}
+  </style>
+
+  <script>
+  (function () {
+    const $ = id => document.getElementById(id);
+    const dobEl = $('ageDob'), onEl = $('ageOn'), out = $('ageResult');
+
+    // "As on" ki default date aaj ki
+    const t = new Date();
+    onEl.value = t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0');
+
+    const parse = s => { const [y, m, d] = s.split('-').map(Number); return { y, m: m - 1, d }; };
+    const utc = o => Date.UTC(o.y, o.m, o.d);
+    const fmt = ms => new Date(ms).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+    $('ageBtn').addEventListener('click', function () {
+      if (!dobEl.value || !onEl.value) { out.innerHTML = '<p class="age-err">Date of Birth aur As-on date dono bharein.</p>'; return; }
+      const dob = parse(dobEl.value), on = parse(onEl.value);
+      if (utc(dob) > utc(on)) { out.innerHTML = '<p class="age-err">Janam tithi, As-on date se pehle honi chahiye.</p>'; return; }
+
+      let y = on.y - dob.y, m = on.m - dob.m, d = on.d - dob.d;
+      if (d < 0) { m--; d += new Date(on.y, on.m, 0).getDate(); }
+      if (m < 0) { y--; m += 12; }
+
+      const DAY = 86400000;
+      const totalDays = Math.round((utc(on) - utc(dob)) / DAY);
+      let next = Date.UTC(on.y, dob.m, dob.d);
+      if (next < utc(on)) next = Date.UTC(on.y + 1, dob.m, dob.d);
+      const daysLeft = Math.round((next - utc(on)) / DAY);
+      const weekday = new Date(utc(dob)).toLocaleDateString('en-IN', { weekday: 'long', timeZone: 'UTC' });
+
+      let html = '<div class="age-main">' + y + ' Years, ' + m + ' Months, ' + d + ' Days</div>' +
+        '<ul class="age-list">' +
+        '<li><span>Total Months</span><b>' + (y * 12 + m) + '</b></li>' +
+        '<li><span>Total Days</span><b>' + totalDays.toLocaleString('en-IN') + '</b></li>' +
+        '<li><span>Next Birthday</span><b>' + (daysLeft === 0 ? 'Aaj hai! 🎉' : fmt(next) + ' (' + daysLeft + ' din baad)') + '</b></li>' +
+        '<li><span>Janam ka din</span><b>' + weekday + '</b></li>' +
+        '</ul>';
+
+      const minV = $('ageMin').value, maxV = $('ageMax').value;
+      if (minV !== '' || maxV !== '') {
+        const okMin = minV === '' || y >= Number(minV);
+        const okMax = maxV === '' || y <= Number(maxV);
+        html += (okMin && okMax)
+          ? '<div class="age-ok">✔ Eligible — umar limit ke andar hai</div>'
+          : '<div class="age-no">✘ Eligible nahi — ' + (!okMin ? 'umar minimum se kam hai' : 'umar maximum se zyada hai') + '</div>';
+      }
+      out.innerHTML = html;
+    });
+  })();
+  </script>
+</section>
+
+<script>
+(function () {
+  // Size/KB yahan edit karein — official site se verify zaroor karein.
+  const SPECS = {
+    UTI:  { photo:{w:213,h:213,kb:30}, sign:{w:400,h:200,kb:30}, doc:{w:null,h:null,kb:200} },
+    NSDL: { photo:{w:213,h:213,kb:50}, sign:{w:354,h:157,kb:50}, doc:{w:null,h:null,kb:300} }
+  };
+
+  const $ = id => document.getElementById(id);
+  const val = n => (document.querySelector('input[name=' + n + ']:checked') || {}).value;
+  const msg = $('panMsg');
+
+  function getSpec() {
+    const p = val('panProv'), t = val('panType');
+    return p && t ? SPECS[p][t] : null;
+  }
+
+  function showSpec() {
+    const s = getSpec();
+    $('panSpec').textContent = s
+      ? 'Size: ' + (s.w ? s.w + '×' + s.h + ' px' : 'original') + ' • Max ' + s.kb + ' KB • JPG'
+      : 'Pehle UTI/NSDL aur Type select karein.';
+  }
+  document.querySelectorAll('input[name=panProv], input[name=panType]')
+    .forEach(r => r.addEventListener('change', showSpec));
+
+  $('panImage').addEventListener('change', function () {
+    const f = this.files[0];
+    msg.textContent = f
+      ? 'Photo mil gayi: ' + f.name + ' (' + (f.size / 1024).toFixed(0) + ' KB). Ab "Resize PAN Photo" dabayein.'
+      : '';
+  });
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('Ye image khul nahi rahi. JPG ya PNG try karein.'));
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  const toBlob = (c, q) => new Promise(r => c.toBlob(r, 'image/jpeg', q));
+
+  $('panResizeBtn').addEventListener('click', async function () {
+    try {
+      const s = getSpec();
+      const f = $('panImage').files[0];
+      if (!s) { msg.textContent = 'Pehle UTI/NSDL aur Type select karein.'; return; }
+      if (!f) { msg.textContent = 'Pehle photo choose karein.'; return; }
+
+      msg.textContent = 'Resize ho raha hai...';
+      const img = await loadImage(f);
+
+      let w = s.w || img.naturalWidth, h = s.h || img.naturalHeight;
+      if (!s.w) {
+        const m = Math.max(w, h);
+        if (m > 1600) { w = Math.round(w * 1600 / m); h = Math.round(h * 1600 / m); }
+      }
+      const c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      const x = c.getContext('2d');
+      x.fillStyle = '#fff'; x.fillRect(0, 0, w, h);
+      x.drawImage(img, 0, 0, w, h);
+
+      let q = 0.95, blob = await toBlob(c, q);
+      while (blob && blob.size > s.kb * 1024 && q > 0.1) { q -= 0.05; blob = await toBlob(c, q); }
+      if (!blob) throw new Error('Image ban nahi paayi.');
+
+      const url = URL.createObjectURL(blob);
+      msg.textContent = blob.size <= s.kb * 1024
+        ? 'Ho gaya: ' + w + '×' + h + ' px, ' + (blob.size / 1024).toFixed(1) + ' KB'
+        : 'Size ' + (blob.size / 1024).toFixed(1) + ' KB hai, limit se zyada — chhoti image try karein.';
+      $('panPreview').innerHTML = '<img src="' + url + '">';
+      const a = $('panDownload');
+      a.href = url;
+      a.download = val('panProv') + '_' + val('panType') + '.jpg';
+      a.style.display = 'inline-block';
+    } catch (err) {
+      msg.textContent = 'Error: ' + err.message;
+    }
+  });
+
+  msg.textContent = 'Tool ready hai.';
+})();
+</script>
+
+
+<div class="official-pan">
+    <p>Want to Apply for PAN Card?</p>
+
+    <h3>Official PAN Application</h3>
+
+    <a href="https://www.protean-tinpan.com/"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="protean-link">
+
+        Visit Protean Official Website →
+    </a>
+
+    <small>External official website • Protean</small>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

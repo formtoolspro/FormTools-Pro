@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator - FormTools Pro</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f3f6fb;color:#222}
+  .top{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:14px 20px;display:flex;
+    align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:10}
+  .logo{font-size:22px;font-weight:800;color:#0d4fc4;text-decoration:none}
+  .logo span{color:#4f6df5}
+  .back{text-decoration:none;color:#fff;background:#0d6efd;padding:9px 16px;border-radius:8px;font-weight:600}
+  .wrap{max-width:560px;margin:30px auto;padding:0 16px}
+  .box{background:#fff;border-radius:16px;padding:26px;box-shadow:0 6px 20px rgba(0,0,0,.07)}
+  h1{margin:0 0 6px;text-align:center;color:#0d4fc4;font-size:28px}
+  .sub{text-align:center;margin:0 0 18px;color:#555}
+  label{display:block;margin:14px 0 6px;font-weight:600}
+  small{font-weight:400;color:#666}
+  input{width:100%;padding:11px;border:1px solid #ced4da;border-radius:8px;font-size:16px}
+  .two{display:flex;gap:12px}.two>div{flex:1}
+  button{width:100%;margin-top:20px;background:#0d6efd;color:#fff;border:0;border-radius:10px;
+    padding:14px;font-size:18px;cursor:pointer}
+  #res{margin-top:20px}
+  .main{background:#eef4ff;border:2px solid #0d6efd;border-radius:10px;padding:16px;text-align:center;
+    font-size:22px;font-weight:700;color:#0b4fb3}
+  ul{margin:14px 0 0;padding:0;list-style:none}
+  li{padding:9px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;gap:10px}
+  .ok{margin-top:14px;padding:12px;border-radius:8px;text-align:center;font-weight:700;background:#d1e7dd;color:#0f5132}
+  .no{margin-top:14px;padding:12px;border-radius:8px;text-align:center;font-weight:700;background:#f8d7da;color:#842029}
+  .err{color:#842029;text-align:center;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="logo" href="INDEX.HTML">FORMTOOLS <span>PRO</span></a>
+  <a class="back" href="INDEX.HTML">← Home</a>
+</div>
+
+<div class="wrap">
+  <div class="box">
+    <h1>Age Calculator</h1>
+    <p class="sub">Janam tithi se exact umar aur form eligibility check karein.</p>
+
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob">
+
+    <label for="on">Age as on Date <small>(form ki cut-off date)</small></label>
+    <input type="date" id="on">
+
+    <div class="two">
+      <div><label for="min">Min age (optional)</label><input type="number" id="min" min="0" placeholder="18"></div>
+      <div><label for="max">Max age (optional)</label><input type="number" id="max" min="0" placeholder="27"></div>
+    </div>
+
+    <button id="calc" type="button">Calculate Age</button>
+    <div id="res"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const out = $('res');
+  const t = new Date();
+  $('on').value = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+
+  const parse = s => { const [y,m,d] = s.split('-').map(Number); return {y, m:m-1, d}; };
+  const utc = o => Date.UTC(o.y, o.m, o.d);
+  const fmt = ms => new Date(ms).toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric', timeZone:'UTC'});
+
+  $('calc').addEventListener('click', function () {
+    if (!$('dob').value || !$('on').value) { out.innerHTML = '<p class="err">Date of Birth aur As-on date dono bharein.</p>'; return; }
+    const dob = parse($('dob').value), on = parse($('on').value);
+    if (utc(dob) > utc(on)) { out.innerHTML = '<p class="err">Janam tithi, As-on date se pehle honi chahiye.</p>'; return; }
+
+    let y = on.y - dob.y, m = on.m - dob.m, d = on.d - dob.d;
+    if (d < 0) { m--; d += new Date(on.y, on.m, 0).getDate(); }
+    if (m < 0) { y--; m += 12; }
+
+    const DAY = 86400000;
+    const total = Math.round((utc(on) - utc(dob)) / DAY);
+    let next = Date.UTC(on.y, dob.m, dob.d);
+    if (next < utc(on)) next = Date.UTC(on.y + 1, dob.m, dob.d);
+    const left = Math.round((next - utc(on)) / DAY);
+    const wd = new Date(utc(dob)).toLocaleDateString('en-IN', {weekday:'long', timeZone:'UTC'});
+
+    let html = '<div class="main">' + y + ' Years, ' + m + ' Months, ' + d + ' Days</div><ul>' +
+      '<li><span>Total Months</span><b>' + (y*12+m) + '</b></li>' +
+      '<li><span>Total Days</span><b>' + total.toLocaleString('en-IN') + '</b></li>' +
+      '<li><span>Next Birthday</span><b>' + (left === 0 ? 'Aaj hai! 🎉' : fmt(next) + ' (' + left + ' din baad)') + '</b></li>' +
+      '<li><span>Janam ka din</span><b>' + wd + '</b></li></ul>';
+
+    const mn = $('min').value, mx = $('max').value;
+    if (mn !== '' || mx !== '') {
+      const okMin = mn === '' || y >= Number(mn), okMax = mx === '' || y <= Number(mx);
+      html += (okMin && okMax)
+        ? '<div class="ok">✔ Eligible — umar limit ke andar hai</div>'
+        : '<div class="no">✘ Eligible nahi — ' + (!okMin ? 'umar minimum se kam hai' : 'umar maximum se zyada hai') + '</div>';
+    }
+    out.innerHTML = html;
+  });
+})();
+</script>
+</body>
+</html>
